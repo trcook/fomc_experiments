@@ -58,13 +58,11 @@ x.to_csv("./all_speeches_with_topics.csv")
 #%% get some data about 
 # just looking at soem quick things about topic distribution
 
-utopics=set()
-for i in range(1,6):
-    utopics |= set(x.loc[:,f"topic{i}"].unique())
-
-#%%
 
 stopics=pd.concat([x.loc[:,f"topic{i}"] for i in range(1,6)])
+stopics=stopics.str.lower()
+stopics=stopics.str.replace(".","")
 stopics=pd.value_counts(stopics)
 
 stopics.to_csv("topic_frequencies.csv")
+stopics[:100].to_csv("topic_frequencies_top100.csv")
