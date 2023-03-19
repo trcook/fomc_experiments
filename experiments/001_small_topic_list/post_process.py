@@ -19,3 +19,52 @@ if os.path.exists("out_all.jsonl"):
 
 
 # %%
+
+
+topicframe=pd.DataFrame([{"index":i["observation_index"],"topics":i["choices"][0]["message"]["content"]} for i in resplist])
+topicframe.loc[:,"index"]=topicframe.index.astype("int")
+#%%
+x=pd.read_csv("../../data/speeches/fed_speeches_paragraphs-0316.csv") # specific version used for this data
+#%%
+x=pd.merge(topicframe,x,left_on="index",right_index=True)
+#%%
+x.drop(columns=["index","idx"],inplace=True)
+
+
+
+#%%
+x.to_csv("./all_speeches_with_topics.csv")
+
+#%%
+x=pd.read_csv("./all_speeches_with_topics.csv")
+
+#%% breakout topics into columns. 
+# FWIW -- topics appear to be listed in descending order from most important to least -- though sometimes that's not true
+def split_topics(i,n):
+    il=i.split(",")
+    if len(il)<(n+1):
+        return ""
+    else: 
+        return il[n].strip()
+
+for n in range(5):
+    x.loc[:,f"topic{n+1}"]=x.loc[:,"topics"].apply(lambda i: split_topics(i,n))
+
+
+#%% save back again
+
+
+x.to_csv("./all_speeches_with_topics.csv")
+#%% get some data about 
+# just looking at soem quick things about topic distribution
+
+utopics=set()
+for i in range(1,6):
+    utopics |= set(x.loc[:,f"topic{i}"].unique())
+
+#%%
+
+stopics=pd.concat([x.loc[:,f"topic{i}"] for i in range(1,6)])
+stopics=pd.value_counts(stopics)
+
+stopics.to_csv("topic_frequencies.csv")
