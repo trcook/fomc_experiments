@@ -1,0 +1,4 @@
+experiments/001_small_topic_list/out_all.jsonl filter=lfs diff=lfs merge=lfs -text
+experiments/001_small_topic_list/all_speeches_with_topics.csv filter=lfs diff=lfs merge=lfs -text
+experiments/001_small_topic_list/topic_frequencies.csv filter=lfs diff=lfs merge=lfs -text
+experiments/001_small_topic_list/topic_frequencies_top100.csv filter=lfs diff=lfs merge=lfs -text
