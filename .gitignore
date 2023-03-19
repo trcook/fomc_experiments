@@ -3,3 +3,4 @@ venv
 *.jsonl
 *.csv
 *.zip
+.DS_Store
