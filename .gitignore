@@ -5,3 +5,4 @@ venv
 *.zip
 .DS_Store
 TOM_NOTES.md
+*.tar.gz
