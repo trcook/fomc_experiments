@@ -2,10 +2,12 @@
 
 For 2014 and 2015 speeches, we send the following prompt to chatGPT:
 
+```
 >system: You are an economist
 >user: Consider the following statement
 >{{MSG}}
->On a single line, write a comma-separated list of 5 keywords that describe this statement.
+>user: On a single line, write a comma-separated list of 5 keywords that describe this statement.
+```
 
 This runs through "topic_label.py"
 
